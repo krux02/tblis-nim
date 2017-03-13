@@ -1,9 +1,17 @@
 #include "tblis/src/tblis.h"
 
+void iota_fill_double(double *data, long len) {
+	long i;
+	for(i=0; i < len; ++i) {
+		data[i] = i;
+	}
+}
+
 int main() {
-  len_type len_A = {10, 9, 2, 5};
-  stride_type stride_A = {1, 10, 90, 180};
+  len_type len_A[] = {10, 9, 2, 5};
+  stride_type stride_A[] = {1, 10, 90, 180};
   double data_A[10 * 9 * 2 * 5];
+	iota_fill_double(data_A, 10*9*2*5);
   tblis_tensor A;
   A.type = TYPE_DOUBLE;
   *(double *)A.scalar = 1.0;
@@ -12,9 +20,10 @@ int main() {
   A.len = len_A;
   A.stride = stride_A;
 
-  len_type len_B = {7, 5, 9, 8};
-  stride_type stride_B = {1, 7, 35, 315};
+  len_type len_B[] = {7, 5, 9, 8};
+  stride_type stride_B[] = {1, 7, 35, 315};
   double data_B[7 * 5 * 9 * 8];
+	iota_fill_double(data_B, 7*5*9*8);
   tblis_tensor B;
   B.type = TYPE_DOUBLE;
   *(double *)B.scalar = 1.0;
@@ -23,8 +32,8 @@ int main() {
   B.len = len_B;
   B.stride = stride_B;
 
-  len_type len_C = {7, 2, 10, 8};
-  stride_type stride_C = {1, 7, 14, 140};
+  len_type len_C[] = {7, 2, 10, 8};
+  stride_type stride_C[] = {1, 7, 14, 140};
   double data_C[7 * 2 * 10 * 8];
   tblis_tensor C;
   C.type = TYPE_DOUBLE;
@@ -37,4 +46,10 @@ int main() {
   // initialize data_A and data_B...
   // this computes C[abcd] += A[cebf] B[afed]
   tblis_tensor_mult(NULL, NULL, &A, "cebf", &B, "afed", &C, "abcd");
+
+	int i = 0;
+	int N = sizeof(data_C) / sizeof(typeof(*data_C));
+	for(i = 0; i < N; ++i){
+		printf("%f\n", data_C[i]);
+	}
 }
