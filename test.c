@@ -1,4 +1,4 @@
-#include "tblis/src/tblis.h"
+#include <tblis/tblis.h>
 
 void iota_fill_double(double *data, long len) {
 	long i;
@@ -9,7 +9,7 @@ void iota_fill_double(double *data, long len) {
 
 int main() {
   len_type len_A[] = {10, 9, 2, 5};
-  stride_type stride_A[] = {1, 10, 90, 180};
+  long stride_A[] = {1, 10, 90, 180};
   double data_A[10 * 9 * 2 * 5];
 	iota_fill_double(data_A, 10*9*2*5);
   tblis_tensor A;
@@ -49,7 +49,7 @@ int main() {
 
 	int i = 0;
 	int N = sizeof(data_C) / sizeof(typeof(*data_C));
-	for(i = 0; i < N; ++i){
-		printf("%f\n", data_C[i]);
+	for(i = 0; i < N; ++i) {
+		printf("%8.0f\n", data_C[i]);
 	}
 }

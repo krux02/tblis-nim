@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
-include(ExternalProject)
-link_directories(tblis/lib/.libs)
+
+link_directories(tblis-c/target/lib)
+include_directories(tblis-c/target/include)
+
 add_executable(a.out test.c)
 target_link_libraries(a.out tblis)
-target_include_directories(a.out PUBLIC tblis/src tblis/src/external/tci/src)

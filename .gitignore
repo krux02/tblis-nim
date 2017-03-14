@@ -1,1 +1,5 @@
 build
+nimcache
+tblis
+test
+target/
