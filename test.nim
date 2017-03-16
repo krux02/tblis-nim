@@ -3,7 +3,6 @@ import tblis
 #proc `[]`[T](arg: ptr T; idx: SomeInteger): var T =
 #  let tmp = cast[uint](arg) + uint(sizeof(T) * idx)
 #  cast[ptr T](tmp)[]
-
 proc `[]`[T](arg: ptr T; idx: SomeInteger): var T {.importcpp: "(#[#])", nodecl.}
 
 proc iota_fill_double(data: ptr float64; len: int64): void =
@@ -70,16 +69,9 @@ proc main(): void =
   C.ndim = 4;
   C.len = len_C[0].addr
   C.stride = stride_C[0].addr
-
   # initialize data_A and data_B...
   # this computes C[abcd] += A[cebf] B[afed]
   tblis.mult(nil, nil, A.addr, "cebf", B.addr, "afed", C.addr, "abcd");
-
-  echo "tensor A"
-  A.print
-
-  echo "tensor B"
-  B.print
 
   echo "tensor C"
   C.print

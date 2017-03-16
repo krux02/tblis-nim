@@ -4,9 +4,10 @@
 # {.link: libtblis .}
 # {.link: libtci .}
 # {.passL: "-lstdc++ -lm -lhwloc -lomp".}
+import strutils
 
-## fuck it, and fuck you
-{.passL: "-L/home/arne/proj/nim/tblis/tblis-c/target/lib -Wl,-rpath,/home/arne/proj/nim/tblis/tblis-c/target/lib -rdynamic -ltblis".}
+const tblisLibDir = staticExec("readlink -f .") & "/tblis-c/target/lib"
+{.passL: format("-L$1 -Wl,-rpath,$1 -rdynamic -ltblis", tblisLibDir).}
 
 type
   comm = object
