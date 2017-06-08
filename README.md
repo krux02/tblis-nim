@@ -4,7 +4,7 @@ nim wrapper for tblis
 
 ```bash
 
-cd tblis
+cd tblis-c
 ./configure --prefix=$(readlink -f ./target)
 make -j4
 make install

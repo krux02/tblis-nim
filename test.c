@@ -1,4 +1,4 @@
-#include <tblis/tblis.h>
+#include <tblis.h>
 
 void iota_fill_double(double *data, long len) {
 	long i;
